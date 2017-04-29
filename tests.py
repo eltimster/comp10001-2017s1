@@ -36,15 +36,15 @@ test_cases = {
         ("""submission.comp101_phase_type([['9D', '9S', 'AD', '9H'], ['AC', 'AS', 'AD', 'AH']])""", None), 
 
         # one run of eight cards (basic case)
-        ("""submission.comp101_phase_type([['2D', '3C', '4D', '5S', '6C', '7D', '8H', '9C']])""", 4), 
+        ("""submission.comp101_phase_type([['2D', '3C', '4D', '5S', '6C', '7D', '8H', '9S']])""", 4), 
         # INVALID run of eight cards (out of order)
-        ("""submission.comp101_phase_type([['3C', '2D', '4D', '5S', '6C', '7D', '8H', '9C']])""", None), 
+        ("""submission.comp101_phase_type([['3C', '2D', '4D', '5S', '6C', '7D', '8H', '9S']])""", None), 
         # one run of eight cards (with Wilds)
-        ("""submission.comp101_phase_type([['2D', '3C', 'AD', '5S', '6C', '7D', '8H', 'AC']])""", 4), 
+        ("""submission.comp101_phase_type([['3C', 'AD', '5S', '6C', '7D', '8H', 'AC', 'AS']])""", 4), 
         # one run of eight cards (with Wilds, incl at start)
-        ("""submission.comp101_phase_type([['AH', 'AC', 'AD', '5S', '6C', '7D', '8H', 'AC']])""", 4), 
+        ("""submission.comp101_phase_type([['AH', 'AC', 'AD', '5S', '6C', '7D', '8H', '9S']])""", 4), 
         # INVALID run of eight cards (first Wild assigned to invalid value)
-        ("""submission.comp101_phase_type([['AD', '2D', '3C', 'AD', '5S', '6C', '7D', '8HD']])""", None), 
+        ("""submission.comp101_phase_type([['AD', '2D', '3C', 'AD', '5S', '6C', '7D', '8H']])""", None), 
 
         # one run of four cards of same colour + one set of four of same value (basic case)
         ("""submission.comp101_phase_type([['2D', '3H', '4D', '5D'], ['7C', '7D', '7H', '7C']])""", 5), 
@@ -88,10 +88,22 @@ test_cases = {
         # INVALID attempt to place card on own phase (group ID incorrect)
         ("""submission.comp101_is_valid_play((3, ('2H', (1, 1, 3))), 1, [[], (1, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), [], []], [(0, [(1, 'JS'), (4, 'JS')]), (1, [(1, 'JS'), (2, [['2S', '2S', '2C'], ['AS', '5S', '5S']])])], [0, 1, 0, 0], ['2H', '8S', '9S', '0S', 'JS'])""", False),
         # INVALID attempt to place card on Player 0's phase (hasn't picked up card yet)
-        ("""submission.comp101_is_valid_play((3, ('2C', (0, 1, 3))), 1, [[['2S', '2S', '2C'], ['AS', '5S', '5S']], [], [], []], [(0, [(1, 'JS'), (2, [['2S', '2S', '2C'], ['AS', '5S', '5S']])])], [1, 0, 0, 0], ['AD', '2C', '2H', '2H', '5H', '5D', '7S', '8S', '9S', '0S', 'JS'])""", False),
+        ("""submission.comp101_is_valid_play((3, ('2C', (0, 1, 3))), 1, [(1, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), [], [], []], [(0, [(1, 'JS'), (2, [['2S', '2S', '2C'], ['AS', '5S', '5S']])])], [1, 0, 0, 0], ['AD', '2C', '2H', '2H', '5H', '5D', '7S', '8S', '9S', '0S', 'JS'])""", False),
         # INVALID attempt to place card on Player 0's phase (hasn't got own phase yet)
-        ("""submission.comp101_is_valid_play((3, ('2C', (0, 1, 3))), 1, [[['2S', '2S', '2C'], ['AS', '5S', '5S']], [], [], []], [(0, [(1, 'JS'), (2, [['2S', '2S', '2C'], ['AS', '5S', '5S']])]), (1, [(1, '0S')])], [1, 0, 0, 0], ['AD', '2C', '2H', '2H', '5H', '5D', '7S', '8S', '9S', '0S', 'JS'])""", False),
+        ("""submission.comp101_is_valid_play((3, ('2C', (0, 1, 3))), 1, [(1, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), [], [], []], [(0, [(1, 'JS'), (2, [['2S', '2S', '2C'], ['AS', '5S', '5S']])]), (1, [(1, '0S')])], [1, 0, 0, 0], ['AD', '2C', '2H', '2H', '5H', '5D', '7S', '8S', '9S', '0S', 'JS'])""", False),
+        # place card on own phase (run of 8)
+        ("""submission.comp101_is_valid_play((3, ('0S', (1, 0, 8))), 1, [[], (4, [['2C', '3H', '4D', 'AD', '6S', '7C', '8S', '9H']]), [], []], [(0, [(1, 'JS'), (4, 'JS')]), (1, [(1, 'JS'), (2, [['2C', '3H', '4D', 'AD', '6S', '7C', '8S', '9H']])])], [0, 4, 0, 0], ['5D', '0S', 'JS'])""", True),
+        # INVALID attempt to place card on own phase (run of 8 -- doesn't hold card)
+        ("""submission.comp101_is_valid_play((3, ('0S', (1, 0, 8))), 1, [[], (4, [['2C', '3H', '4D', 'AD', '6S', '7C', '8S', '9H']]), [], []], [(0, [(1, 'JS'), (4, 'JS')]), (1, [(1, 'JS'), (2, [['2C', '3H', '4D', 'AD', '6S', '7C', '8S', '9H']])])], [0, 4, 0, 0], ['5D', '9S', 'JS'])""", False),
+        # place card on own phase (run of 8 -- Wild)
+        ("""submission.comp101_is_valid_play((3, ('AS', (1, 0, 8))), 1, [[], (4, [['2C', '3H', '4D', 'AD', '6S', '7C', '8S', '9H']]), [], []], [(0, [(1, 'JS'), (4, 'JS')]), (1, [(1, 'JS'), (2, [['2C', '3H', '4D', 'AD', '6S', '7C', '8S', '9H']])])], [0, 4, 0, 0], ['5D', 'AS', 'JS'])""", True),
         
+        # discard card
+        ("""submission.comp101_is_valid_play((4, 'JS'), 1, [[], (1, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), [], []], [(0, [(1, 'JS'), (4, 'JS')]), (1, [(1, 'JS'), (2, [['2S', '2S', '2C'], ['AS', '5S', '5S']])])], [0, 1, 0, 0], ['AD', '8S', '9S', '0S', 'JS'])""", True),
+        # INVALID attempt to discard card (doesn't hold card)
+        ("""submission.comp101_is_valid_play((4, 'JC'), 1, [[], (1, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), [], []], [(0, [(1, 'JS'), (4, 'JS')]), (1, [(1, 'JS'), (2, [['2S', '2S', '2C'], ['AS', '5S', '5S']])])], [0, 1, 0, 0], ['AD', '8S', '9S', '0S', 'JS'])""", False),
+        # INVALID attempt to discard card (has already discarded card)
+        ("""submission.comp101_is_valid_play((4, '9S'), 1, [[], (1, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), [], []], [(0, [(1, 'JS'), (4, 'JS')]), (1, [(1, 'JS'), (2, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), (4, 'JC')])], [0, 1, 0, 0], ['AD', '8S', '9S', '0S', 'JS'])""", False),
     ],
 
 
