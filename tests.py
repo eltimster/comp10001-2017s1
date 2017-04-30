@@ -65,45 +65,45 @@ test_cases = {
     "comp101_is_valid_play":
     [
         # play Phase 1
-        ("""submission.comp101_is_valid_play((2, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), 0, [[], [], [], []], [(0, [(1, 'JS')])], [0, 0, 0, 0], ['AS', '2S', '2S', '2C', '5S', '5S', '7S', '8S', '9S', '0S', 'JS'])""", True),
+        ("""submission.comp101_is_valid_play((3, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), 0, [(None, []), (None, []), (None, []), (None, [])], [(0, [(1, 'JS')])], [0, 0, 0, 0], ['AS', '2S', '2S', '2C', '5S', '5S', '7S', '8S', '9S', '0S', 'JS'])""", True),
         # INVALID attempt to play Phase 1 (as already on Phase 2)
-        ("""submission.comp101_is_valid_play((2, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), 0, [[], [], [], []], [(0, [(1, 'JS')])], [1, 0, 0, 0], ['AS', '2S', '2S', '2C', '5S', '5S', '7S', '8S', '9S', '0S', 'JS'])""", False),
+        ("""submission.comp101_is_valid_play((3, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), 0, [(None, []), (None, []), (None, []), (None, [])], [(0, [(1, 'JS')])], [1, 0, 0, 0], ['AS', '2S', '2S', '2C', '5S', '5S', '7S', '8S', '9S', '0S', 'JS'])""", False),
         # INVALID attempt to play Phase 1 (as doesn't hold the necessary cards)
-        ("""submission.comp101_is_valid_play((2, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), 0, [[], [], [], []], [(0, [(1, 'JS')])], [1, 0, 0, 0], ['KS', '2S', '2S', '2C', '5S', '5S', '7S', '8S', '9S', '0S', 'JS'])""", False),
+        ("""submission.comp101_is_valid_play((3, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), 0, [(None, []), (None, []), (None, []), (None, [])], [(0, [(1, 'JS')])], [1, 0, 0, 0], ['KS', '2S', '2S', '2C', '5S', '5S', '7S', '8S', '9S', '0S', 'JS'])""", False),
         # play Phase 2
-        ("""submission.comp101_is_valid_play((2, [['2S', '2S', '9S', 'AS', '5S', '5S', 'JS']]), 0, [[], [], [], []], [(0, [(1, 'JS')])], [1, 0, 0, 0], ['AS', '2S', '2S', '2C', '5S', '5S', '7S', '8S', '9S', '0S', 'JS'])""", True),
+        ("""submission.comp101_is_valid_play((3, [['2S', '2S', '9S', 'AS', '5S', '5S', 'JS']]), 0, [(None, []), (None, []), (None, []), (None, [])], [(0, [(1, 'JS')])], [1, 0, 0, 0], ['AS', '2S', '2S', '2C', '5S', '5S', '7S', '8S', '9S', '0S', 'JS'])""", True),
 
         # place card on own phase (set of three)
-        ("""submission.comp101_is_valid_play((3, ('AD', (1, 0, 3))), 1, [[], (1, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), [], []], [(0, [(1, 'JS'), (4, 'JS')]), (1, [(1, 'JS'), (2, [['2S', '2S', '2C'], ['AS', '5S', '5S']])])], [0, 1, 0, 0], ['AD', '8S', '9S', '0S', 'JS'])""", True),
+        ("""submission.comp101_is_valid_play((4, ('AD', (1, 0, 3))), 1, [(None, []), (1, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), (None, []), (None, [])], [(0, [(1, 'JS'), (5, 'JS')]), (1, [(1, 'JS'), (2, [['2S', '2S', '2C'], ['AS', '5S', '5S']])])], [0, 1, 0, 0], ['AD', '8S', '9S', '0S', 'JS'])""", True),
         # place card on own phase (set of three)
-        ("""submission.comp101_is_valid_play((3, ('AD', (1, 1, 0))), 1, [[], (1, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), [], []], [(0, [(1, 'JS'), (4, 'JS')]), (1, [(1, 'JS'), (2, [['2S', '2S', '2C'], ['AS', '5S', '5S']])])], [0, 1, 0, 0], ['AD', '8S', '9S', '0S', 'JS'])""", True),
+        ("""submission.comp101_is_valid_play((4, ('AD', (1, 1, 0))), 1, [(None, []), (1, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), (None, []), (None, [])], [(0, [(1, 'JS'), (5, 'JS')]), (1, [(1, 'JS'), (2, [['2S', '2S', '2C'], ['AS', '5S', '5S']])])], [0, 1, 0, 0], ['AD', '8S', '9S', '0S', 'JS'])""", True),
         # place card on own phase (set of same suit)
-        ("""submission.comp101_is_valid_play((3, ('JS', (1, 0, 0))), 1, [[], (2, [['2S', '2S', 'AS', '5S', '5S', '7S', 'JS']]), [], []], [(0, [(1, 'JS'), (4, 'JS')]), (1, [(1, 'JS'), (2, [['2S', '2S', 'AS', '5S', '5S', '7S', 'JS']])])], [0, 2, 0, 0], ['5D', '0S', 'JS', 'KC'])""", True),
+        ("""submission.comp101_is_valid_play((4, ('JS', (1, 0, 0))), 1, [(None, []), (2, [['2S', '2S', 'AS', '5S', '5S', '7S', 'JS']]), (None, []), (None, [])], [(0, [(1, 'JS'), (5, 'JS')]), (1, [(1, 'JS'), (2, [['2S', '2S', 'AS', '5S', '5S', '7S', 'JS']])])], [0, 2, 0, 0], ['5D', '0S', 'JS', 'KC'])""", True),
         # INVALID attempt to place card on own phase (wrong suit)
-        ("""submission.comp101_is_valid_play((3, ('KC', (1, 0, 0))), 1, [[], (2, [['2S', '2S', 'AS', '5S', '5S', '7S', 'JS']]), [], []], [(0, [(1, 'JS'), (4, 'JS')]), (1, [(1, 'JS'), (2, [['2S', '2S', 'AS', '5S', '5S', '7S', 'JS']])])], [0, 2, 0, 0], ['5D', '0S', 'JS', 'KC'])""", False),
+        ("""submission.comp101_is_valid_play((4, ('KC', (1, 0, 0))), 1, [(None, []), (2, [['2S', '2S', 'AS', '5S', '5S', '7S', 'JS']]), (None, []), (None, [])], [(0, [(1, 'JS'), (5, 'JS')]), (1, [(1, 'JS'), (2, [['2S', '2S', 'AS', '5S', '5S', '7S', 'JS']])])], [0, 2, 0, 0], ['5D', '0S', 'JS', 'KC'])""", False),
         # place card on own phase (set of four)
-        ("""submission.comp101_is_valid_play((3, ('5D', (1, 1, 0))), 1, [[], (3, [['2S', '2S', '2C', '2H'], ['AS', '5S', '5S', '5H']]), [], []], [(0, [(1, 'JS'), (4, 'JS')]), (1, [(1, 'JS'), (2, [['2S', '2S', '2C', '2H'], ['AS', '5S', '5S', '5H']])])], [0, 3, 0, 0], ['5D', '0S', 'JS'])""", True),
+        ("""submission.comp101_is_valid_play((4, ('5D', (1, 1, 0))), 1, [(None, []), (3, [['2S', '2S', '2C', '2H'], ['AS', '5S', '5S', '5H']]), (None, []), (None, [])], [(0, [(1, 'JS'), (5, 'JS')]), (1, [(1, 'JS'), (2, [['2S', '2S', '2C', '2H'], ['AS', '5S', '5S', '5H']])])], [0, 3, 0, 0], ['5D', '0S', 'JS'])""", True),
         # INVALID attempt to place card on own phase (index incorrect)
-        ("""submission.comp101_is_valid_play((3, ('AD', (1, 0, 4))), 1, [[], (1, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), [], []], [(0, [(1, 'JS'), (4, 'JS')]), (1, [(1, 'JS'), (2, [['2S', '2S', '2C'], ['AS', '5S', '5S']])])], [0, 1, 0, 0], ['AD', '8S', '9S', '0S', 'JS'])""", False),
+        ("""submission.comp101_is_valid_play((4, ('AD', (1, 0, 4))), 1, [(None, []), (1, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), (None, []), (None, [])], [(0, [(1, 'JS'), (5, 'JS')]), (1, [(1, 'JS'), (2, [['2S', '2S', '2C'], ['AS', '5S', '5S']])])], [0, 1, 0, 0], ['AD', '8S', '9S', '0S', 'JS'])""", False),
         # INVALID attempt to place card on own phase (group ID incorrect)
-        ("""submission.comp101_is_valid_play((3, ('2H', (1, 1, 3))), 1, [[], (1, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), [], []], [(0, [(1, 'JS'), (4, 'JS')]), (1, [(1, 'JS'), (2, [['2S', '2S', '2C'], ['AS', '5S', '5S']])])], [0, 1, 0, 0], ['2H', '8S', '9S', '0S', 'JS'])""", False),
+        ("""submission.comp101_is_valid_play((4, ('2H', (1, 1, 3))), 1, [(None, []), (1, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), (None, []), (None, [])], [(0, [(1, 'JS'), (5, 'JS')]), (1, [(1, 'JS'), (2, [['2S', '2S', '2C'], ['AS', '5S', '5S']])])], [0, 1, 0, 0], ['2H', '8S', '9S', '0S', 'JS'])""", False),
         # INVALID attempt to place card on Player 0's phase (hasn't picked up card yet)
-        ("""submission.comp101_is_valid_play((3, ('2C', (0, 1, 3))), 1, [(1, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), [], [], []], [(0, [(1, 'JS'), (2, [['2S', '2S', '2C'], ['AS', '5S', '5S']])])], [1, 0, 0, 0], ['AD', '2C', '2H', '2H', '5H', '5D', '7S', '8S', '9S', '0S', 'JS'])""", False),
+        ("""submission.comp101_is_valid_play((4, ('2C', (0, 1, 3))), 1, [(1, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), (None, []), (None, []), (None, [])], [(0, [(1, 'JS'), (2, [['2S', '2S', '2C'], ['AS', '5S', '5S']])])], [1, 0, 0, 0], ['AD', '2C', '2H', '2H', '5H', '5D', '7S', '8S', '9S', '0S', 'JS'])""", False),
         # INVALID attempt to place card on Player 0's phase (hasn't got own phase yet)
-        ("""submission.comp101_is_valid_play((3, ('2C', (0, 1, 3))), 1, [(1, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), [], [], []], [(0, [(1, 'JS'), (2, [['2S', '2S', '2C'], ['AS', '5S', '5S']])]), (1, [(1, '0S')])], [1, 0, 0, 0], ['AD', '2C', '2H', '2H', '5H', '5D', '7S', '8S', '9S', '0S', 'JS'])""", False),
+        ("""submission.comp101_is_valid_play((4, ('2C', (0, 1, 3))), 1, [(1, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), (None, []), (None, []), (None, [])], [(0, [(1, 'JS'), (2, [['2S', '2S', '2C'], ['AS', '5S', '5S']])]), (1, [(1, '0S')])], [1, 0, 0, 0], ['AD', '2C', '2H', '2H', '5H', '5D', '7S', '8S', '9S', '0S', 'JS'])""", False),
         # place card on own phase (run of 8)
-        ("""submission.comp101_is_valid_play((3, ('0S', (1, 0, 8))), 1, [[], (4, [['2C', '3H', '4D', 'AD', '6S', '7C', '8S', '9H']]), [], []], [(0, [(1, 'JS'), (4, 'JS')]), (1, [(1, 'JS'), (2, [['2C', '3H', '4D', 'AD', '6S', '7C', '8S', '9H']])])], [0, 4, 0, 0], ['5D', '0S', 'JS'])""", True),
+        ("""submission.comp101_is_valid_play((4, ('0S', (1, 0, 8))), 1, [(None, []), (4, [['2C', '3H', '4D', 'AD', '6S', '7C', '8S', '9H']]), (None, []), (None, [])], [(0, [(1, 'JS'), (5, 'JS')]), (1, [(1, 'JS'), (2, [['2C', '3H', '4D', 'AD', '6S', '7C', '8S', '9H']])])], [0, 4, 0, 0], ['5D', '0S', 'JS'])""", True),
         # INVALID attempt to place card on own phase (run of 8 -- doesn't hold card)
-        ("""submission.comp101_is_valid_play((3, ('0S', (1, 0, 8))), 1, [[], (4, [['2C', '3H', '4D', 'AD', '6S', '7C', '8S', '9H']]), [], []], [(0, [(1, 'JS'), (4, 'JS')]), (1, [(1, 'JS'), (2, [['2C', '3H', '4D', 'AD', '6S', '7C', '8S', '9H']])])], [0, 4, 0, 0], ['5D', '9S', 'JS'])""", False),
+        ("""submission.comp101_is_valid_play((4, ('0S', (1, 0, 8))), 1, [(None, []), (4, [['2C', '3H', '4D', 'AD', '6S', '7C', '8S', '9H']]), (None, []), (None, [])], [(0, [(1, 'JS'), (5, 'JS')]), (1, [(1, 'JS'), (2, [['2C', '3H', '4D', 'AD', '6S', '7C', '8S', '9H']])])], [0, 4, 0, 0], ['5D', '9S', 'JS'])""", False),
         # place card on own phase (run of 8 -- Wild)
-        ("""submission.comp101_is_valid_play((3, ('AS', (1, 0, 8))), 1, [[], (4, [['2C', '3H', '4D', 'AD', '6S', '7C', '8S', '9H']]), [], []], [(0, [(1, 'JS'), (4, 'JS')]), (1, [(1, 'JS'), (2, [['2C', '3H', '4D', 'AD', '6S', '7C', '8S', '9H']])])], [0, 4, 0, 0], ['5D', 'AS', 'JS'])""", True),
+        ("""submission.comp101_is_valid_play((4, ('AS', (1, 0, 8))), 1, [(None, []), (4, [['2C', '3H', '4D', 'AD', '6S', '7C', '8S', '9H']]), (None, []), (None, [])], [(0, [(1, 'JS'), (5, 'JS')]), (1, [(1, 'JS'), (2, [['2C', '3H', '4D', 'AD', '6S', '7C', '8S', '9H']])])], [0, 4, 0, 0], ['5D', 'AS', 'JS'])""", True),
         
         # discard card
-        ("""submission.comp101_is_valid_play((4, 'JS'), 1, [[], (1, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), [], []], [(0, [(1, 'JS'), (4, 'JS')]), (1, [(1, 'JS'), (2, [['2S', '2S', '2C'], ['AS', '5S', '5S']])])], [0, 1, 0, 0], ['AD', '8S', '9S', '0S', 'JS'])""", True),
+        ("""submission.comp101_is_valid_play((5, 'JS'), 1, [(None, []), (1, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), (None, []), (None, [])], [(0, [(1, 'JS'), (5, 'JS')]), (1, [(1, 'JS'), (2, [['2S', '2S', '2C'], ['AS', '5S', '5S']])])], [0, 1, 0, 0], ['AD', '8S', '9S', '0S', 'JS'])""", True),
         # INVALID attempt to discard card (doesn't hold card)
-        ("""submission.comp101_is_valid_play((4, 'JC'), 1, [[], (1, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), [], []], [(0, [(1, 'JS'), (4, 'JS')]), (1, [(1, 'JS'), (2, [['2S', '2S', '2C'], ['AS', '5S', '5S']])])], [0, 1, 0, 0], ['AD', '8S', '9S', '0S', 'JS'])""", False),
+        ("""submission.comp101_is_valid_play((5, 'JC'), 1, [(None, []), (1, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), (None, []), (None, [])], [(0, [(1, 'JS'), (5, 'JS')]), (1, [(1, 'JS'), (2, [['2S', '2S', '2C'], ['AS', '5S', '5S']])])], [0, 1, 0, 0], ['AD', '8S', '9S', '0S', 'JS'])""", False),
         # INVALID attempt to discard card (has already discarded card)
-        ("""submission.comp101_is_valid_play((4, '9S'), 1, [[], (1, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), [], []], [(0, [(1, 'JS'), (4, 'JS')]), (1, [(1, 'JS'), (2, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), (4, 'JC')])], [0, 1, 0, 0], ['AD', '8S', '9S', '0S', 'JS'])""", False),
+        ("""submission.comp101_is_valid_play((5, '9S'), 1, [(None, []), (1, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), (None, []), (None, [])], [(0, [(1, 'JS'), (5, 'JS')]), (1, [(1, 'JS'), (2, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), (5, 'JC')])], [0, 1, 0, 0], ['AD', '8S', '9S', '0S', 'JS'])""", False),
     ],
 
 
