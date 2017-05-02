@@ -12,8 +12,8 @@ test_cases = {
         ("""submission.phasedout_phase_type([['9D', '9S', '9D'], ['0D', '0S', '0D']])""", 1), 
         # two sets of three of same value (case where value is the same)
         ("""submission.phasedout_phase_type([['9D', '9S', '9D'], ['9H', '9S', '9H']])""", 1), 
-        # two sets of three of same value, with Wilds
-        ("""submission.phasedout_phase_type([['9D', '9S', 'AD'], ['6D', 'AS', 'AD']])""", 1), 
+        # INVALID version of two sets of three of same value, as TOO MANY Wilds
+        ("""submission.phasedout_phase_type([['9D', '9S', 'AD'], ['6D', 'AS', 'AD']])""", None), 
         # INVALID version of two sets of three, as one set is all Wilds
         ("""submission.phasedout_phase_type([['9D', '9S', 'AD'], ['AC', 'AS', 'AD']])""", None), 
 
@@ -30,8 +30,8 @@ test_cases = {
         ("""submission.phasedout_phase_type([['9D', '9S', '9D', '9C'], ['0D', '0S', '0D', '0H']])""", 3), 
         # two sets of four of same value (case where value is the same)
         ("""submission.phasedout_phase_type([['9D', '9S', '9D', '9C'], ['9H', '9S', '9H', '9C']])""", 3), 
-        # two sets of four of same value, with Wilds
-        ("""submission.phasedout_phase_type([['9D', '9S', 'AD', '9H'], ['6D', 'AS', 'AD', 'AH']])""", 3), 
+        # INVALID version of two sets of four of same value, as TOO MANY Wilds
+        ("""submission.phasedout_phase_type([['9D', '9S', 'AD', '9H'], ['6D', 'AS', 'AD', 'AH']])""", None), 
         # INVALID version of two sets of four, as one set is all Wilds
         ("""submission.phasedout_phase_type([['9D', '9S', 'AD', '9H'], ['AC', 'AS', 'AD', 'AH']])""", None), 
 
@@ -78,11 +78,11 @@ test_cases = {
         # place card on own phase (set of three)
         ("""submission.phasedout_is_valid_play((4, ('AD', (1, 1, 0))), 1, [(None, []), (1, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), (None, []), (None, [])], [(0, [(1, 'XX'), (5, 'JS')]), (1, [(2, 'JS'), (3, [['2S', '2S', '2C'], ['AS', '5S', '5S']])])], [0, 1, 0, 0], ['AD', '8S', '9S', '0S', 'JS'], 'KC')""", True),
         # place card on own phase (set of same suit)
-        ("""submission.phasedout_is_valid_play((4, ('JS', (1, 0, 0))), 1, [(None, []), (3, [['2S', '2S', 'AS', '5S', '5S', '7S', 'JS']]), (None, []), (None, [])], [(0, [(1, 'XX'), (5, 'JS')]), (1, [(2, 'JS'), (3, [['2S', '2S', 'AS', '5S', '5S', '7S', 'JS']])])], [0, 2, 0, 0], ['5D', '0S', 'JS', 'KC'], 'KC')""", True),
+        ("""submission.phasedout_is_valid_play((4, ('JS', (1, 0, 0))), 1, [(None, []), (2, [['2S', '2S', 'AS', '5S', '5S', '7S', 'JS']]), (None, []), (None, [])], [(0, [(1, 'XX'), (5, 'JS')]), (1, [(2, 'JS'), (3, [['2S', '2S', 'AS', '5S', '5S', '7S', 'JS']])])], [0, 2, 0, 0], ['5D', '0S', 'JS', 'KC'], 'KC')""", True),
         # INVALID attempt to place card on own phase (wrong suit)
-        ("""submission.phasedout_is_valid_play((4, ('KC', (1, 0, 0))), 1, [(None, []), (3, [['2S', '2S', 'AS', '5S', '5S', '7S', 'JS']]), (None, []), (None, [])], [(0, [(1, 'XX'), (5, 'JS')]), (1, [(2, 'JS'), (3, [['2S', '2S', 'AS', '5S', '5S', '7S', 'JS']])])], [0, 2, 0, 0], ['5D', '0S', 'JS', 'KC'], 'KC')""", False),
+        ("""submission.phasedout_is_valid_play((4, ('KC', (1, 0, 0))), 1, [(None, []), (2, [['2S', '2S', 'AS', '5S', '5S', '7S', 'JS']]), (None, []), (None, [])], [(0, [(1, 'XX'), (5, 'JS')]), (1, [(2, 'JS'), (3, [['2S', '2S', 'AS', '5S', '5S', '7S', 'JS']])])], [0, 2, 0, 0], ['5D', '0S', 'JS', 'KC'], 'KC')""", False),
         # place card on own phase (set of four)
-        ("""submission.phasedout_is_valid_play((4, ('5D', (1, 1, 0))), 1, [(None, []), (3, [['2S', '2S', '2C', '2H'], ['AS', '5S', '5S', '5H']]), (None, []), (None, [])], [(0, [(1, 'XX'), (5, 'JS')]), (1, [(2, 'JS'), (3, [['2S', '2S', '2C', '2H'], ['AS', '5S', '5S', '5H']])])], [0, 3, 0, 0], ['5D', '0S', 'JS'], 'KC')""", True),
+        ("""submission.phasedout_is_valid_play((4, ('5D', (1, 1, 0))), 1, [(None, []), (3, [['2S', '2S', '2C', '2H'], ['AS', '5S', '5S', '5H']]), (None, []), (None, [])], [(0, [(1, 'XX'), (5, 'JS')]), (1, [(2, 'JS'), (3, [['2S', '2S', '2C', '2H'], ['AS', '5S', '5S', '5H']])])], [0, 2, 0, 0], ['5D', '0S', 'JS'], 'KC')""", True),
         # INVALID attempt to place card on own phase (index incorrect)
         ("""submission.phasedout_is_valid_play((4, ('AD', (1, 0, 4))), 1, [(None, []), (1, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), (None, []), (None, [])], [(0, [(1, 'XX'), (5, 'JS')]), (1, [(2, 'JS'), (3, [['2S', '2S', '2C'], ['AS', '5S', '5S']])])], [0, 1, 0, 0], ['AD', '8S', '9S', '0S', 'JS'], 'KC')""", False),
         # INVALID attempt to place card on own phase (group ID incorrect)
