@@ -1,11 +1,20 @@
 # dictionary of tests, one for each function in the project spec; in each case, list a number of function calls (as a str), and the correct output for each
 
-# Version: 1.0
-# Created 29/4/17
+# Version: 1.1
+# Created 13/5/17
+
 
 
 
 test_cases = {
+    "phasedout_group_type":
+    [
+        ("""submission.phasedout_group_type(['2S', '2C', '2H'])""", 1), 
+        ("""submission.phasedout_group_type(['AS', '2C', '3S', '4C'])""", None), 
+        ("""submission.phasedout_group_type(['2C', '3S', '4C', '5S'])""", 5), 
+    ],
+
+
     "phasedout_phase_type":
     [
         # two sets of three of same value (basic case)
@@ -82,7 +91,7 @@ test_cases = {
         # INVALID attempt to place card on own phase (wrong suit)
         ("""submission.phasedout_is_valid_play((4, ('KC', (1, 0, 0))), 1, [(None, []), (2, [['2S', '2S', 'AS', '5S', '5S', '7S', 'JS']]), (None, []), (None, [])], [(0, [(1, 'XX'), (5, 'JS')]), (1, [(2, 'JS'), (3, [['2S', '2S', 'AS', '5S', '5S', '7S', 'JS']])])], [0, 2, 0, 0], ['5D', '0S', 'JS', 'KC'], 'KC')""", False),
         # place card on own phase (set of four)
-        ("""submission.phasedout_is_valid_play((4, ('5D', (1, 1, 0))), 1, [(None, []), (3, [['2S', '2S', '2C', '2H'], ['AS', '5S', '5S', '5H']]), (None, []), (None, [])], [(0, [(1, 'XX'), (5, 'JS')]), (1, [(2, 'JS'), (3, [['2S', '2S', '2C', '2H'], ['AS', '5S', '5S', '5H']])])], [0, 2, 0, 0], ['5D', '0S', 'JS'], 'KC')""", True),
+        ("""submission.phasedout_is_valid_play((4, ('5D', (1, 1, 0))), 1, [(None, []), (3, [['2S', '2S', '2C', '2H'], ['AS', '5S', '5S', '5H']]), (None, []), (None, [])], [(0, [(1, 'XX'), (5, 'JS')]), (1, [(2, 'JS'), (3, [['2S', '2S', '2C', '2H'], ['AS', '5S', '5S', '5H']])])], [0, 3, 0, 0], ['5D', '0S', 'JS'], 'KC')""", True),
         # INVALID attempt to place card on own phase (index incorrect)
         ("""submission.phasedout_is_valid_play((4, ('AD', (1, 0, 4))), 1, [(None, []), (1, [['2S', '2S', '2C'], ['AS', '5S', '5S']]), (None, []), (None, [])], [(0, [(1, 'XX'), (5, 'JS')]), (1, [(2, 'JS'), (3, [['2S', '2S', '2C'], ['AS', '5S', '5S']])])], [0, 1, 0, 0], ['AD', '8S', '9S', '0S', 'JS'], 'KC')""", False),
         # INVALID attempt to place card on own phase (group ID incorrect)
